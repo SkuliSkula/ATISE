@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view>
+	<f:metadata>
+		<!-- Start a new process instance. The Process Definition Key is read internally from
+         request parameters and cached in the CDI conversation scope.
+    -->
+		<f:event type="preRenderView"
+			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+	</f:metadata>
+	<h:head>
+		<title>Photographer and Technician work</title>
+	</h:head>
+	<h:body>
+		<h2>Customer invoice payment</h2>
+		<h:form id="submitForm">
+		
+			<h:panelGrid columns="2">
+				<label for="pay">Pay invoice</label>
+				<!-- create process variables using the processVariables map. -->
+				<h:commandButton id="pay_buttom" value="Pay"
+				action="#{camundaTaskForm.completeProcessInstanceForm()}" />
+				
+			</h:panelGrid>
+			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
+
+           NOTE: Syntax is different when working on user task forms, see file "approveLoanRequest.xhtml".
+      -->
+		
+		
+	</h:body>
+</f:view>
+</html>

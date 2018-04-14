@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view>
+	<f:metadata>
+		<!-- Start a new process instance. The Process Definition Key is read internally from
+         request parameters and cached in the CDI conversation scope.
+    -->
+		<f:event type="preRenderView"
+			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+	</f:metadata>
+	<h:head>
+		<title>Book a shooting session</title>
+	</h:head>
+	<h:body>
+		<h2>Browsing the gallery</h2>
+		<h:form id="submitForm">
+		
+			<h:panelGrid columns="4">
+				<label for="pictureOne">Picture 1:</label>
+				<label>Additional editing?</label>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="pictureOne"/>
+				<h:inputText id="pictureOne" value="#{processVariables['pictureOne']}"/>
+					
+				<label for="pictureTwo">Picture 2:</label>
+				<label>Additional editing?</label>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="pictureTwo"/>
+				<h:inputText id="pictureTwo" value="#{processVariables['pictureTwo']}"/>
+
+				<label for="pictureThree">Picture 3:</label>
+				<label>Additional editing?</label>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="pictureThree"/>
+				<h:inputText id="pictureThree" value="#{processVariables['pictureThree']}"/>
+			</h:panelGrid>
+			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
+
+           NOTE: Syntax is different when working on user task forms, see file "approveLoanRequest.xhtml".
+      -->
+      
+      
+      <h:panelGrid columns="2">
+
+				<label for="pickup">Pickup?</label>
+				<!-- create process variables using the processVariables map. -->
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="pickup"/>
+				
+				<label for="printout">Printouts?</label>
+				<!-- create process variables using the processVariables map. -->
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="printouts"/>
+
+			</h:panelGrid>
+      
+			<h:commandButton id="submit_button" value="Done"
+				action="#{camundaTaskForm.completeProcessInstanceForm()}" />
+		</h:form>
+	</h:body>
+</f:view>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view>
+	<f:metadata>
+		<!-- Start a new process instance. The Process Definition Key is read internally from
+         request parameters and cached in the CDI conversation scope.
+    -->
+		<f:event type="preRenderView"
+			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+	</f:metadata>
+	<h:head>
+		<title>Photographer and Technician work</title>
+	</h:head>
+	<h:body>
+			
+			<h2>Technician special request: </h2>
+			<h:panelGrid columns="2">
+				<label for="moreInfo">more information needed?</label>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}"/>
+				
+				<label for="edit">Edit</label>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}"/>
+				
+				<label for="add">Add to gallery</label>
+				<h:commandButton id="upload_buttom" value="Add"
+				action="#{camundaTaskForm.completeProcessInstanceForm()}" />
+				
+			</h:panelGrid>
+			
+		
+	</h:body>
+</f:view>
+</html>
