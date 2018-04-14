@@ -1,0 +1,30 @@
+2018-04-12 09:59:35,529 INFO  [org.jboss.as.server] (Thread-1) WFLYSRV0220: Server shutdown has been requested via an OS signal
+2018-04-12 09:59:35,610 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 82) WFLYUT0022: Unregistered web context: /camunda-invoice
+2018-04-12 09:59:35,678 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 87) WFLYUT0022: Unregistered web context: /camunda-welcome
+2018-04-12 09:59:35,660 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 83) WFLYUT0022: Unregistered web context: /camunda
+2018-04-12 09:59:35,649 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 86) WFLYUT0022: Unregistered web context: /pizza-order
+2018-04-12 09:59:35,764 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 83) WFLYUT0022: Unregistered web context: /h2
+2018-04-12 09:59:35,764 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 88) WFLYUT0022: Unregistered web context: /engine-rest
+2018-04-12 09:59:35,820 INFO  [org.camunda.bpm.container.impl.jboss.service.ProcessApplicationDeploymentService] (ServerService Thread Pool -- 84) Deleting cascade deployment with name 'pizza-order/ce6a6bdd-3c93-11e8-ade1-7cd1c36bff8c'.
+2018-04-12 09:59:35,885 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-8) WFLYUT0019: Host default-host stopping
+2018-04-12 09:59:35,885 INFO  [org.camunda.bpm.engine.jobexecutor] (MSC service thread 1-2) ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.container.impl.jboss.service.MscRuntimeContainerJobExecutor]
+2018-04-12 09:59:35,899 INFO  [org.camunda.bpm.engine.jobexecutor] (pool-10-thread-1) ENGINE-14020 JobExecutor[org.camunda.bpm.container.impl.jboss.service.MscRuntimeContainerJobExecutor] stopped job acquisition
+2018-04-12 09:59:35,908 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-7) WFLYSRV0028: Stopped deployment camunda-welcome.war (runtime-name: camunda-welcome.war) in 295ms
+2018-04-12 09:59:35,912 INFO  [org.camunda.bpm.engine] (MSC service thread 1-2) ENGINE-00007 Process Engine default closed
+2018-04-12 09:59:35,924 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) WFLYSRV0028: Stopped deployment camunda-h2-webapp-7.9.0-alpha1.war (runtime-name: camunda-h2-webapp-7.9.0-alpha1.war) in 312ms
+2018-04-12 09:59:35,929 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-2) WFLYJCA0010: Unbound data source [java:jboss/datasources/ExampleDS]
+2018-04-12 09:59:35,930 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 88) WFLYJPA0011: Stopping Persistence Unit (phase 2 of 2) Service 'pizza-order.war#primary'
+2018-04-12 09:59:35,934 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-8) WFLYSRV0028: Stopped deployment camunda-example-invoice-7.9.0-alpha1.war (runtime-name: camunda-example-invoice-7.9.0-alpha1.war) in 352ms
+2018-04-12 09:59:35,945 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 88) WFLYJPA0011: Stopping Persistence Unit (phase 1 of 2) Service 'pizza-order.war#primary'
+2018-04-12 09:59:35,945 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-5) WFLYJCA0010: Unbound data source [java:jboss/datasources/ProcessEngine]
+2018-04-12 09:59:35,954 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-5) WFLYJCA0019: Stopped Driver service with driver-name = h2
+2018-04-12 09:59:35,961 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-5) WFLYSRV0028: Stopped deployment camunda-engine-rest-7.9.0-alpha1.war (runtime-name: camunda-engine-rest-7.9.0-alpha1.war) in 338ms
+2018-04-12 09:59:35,966 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-5) WFLYUT0008: Undertow HTTP listener default suspending
+2018-04-12 09:59:35,966 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0008: Undertow HTTPS listener https suspending
+2018-04-12 09:59:35,968 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-5) WFLYUT0007: Undertow HTTP listener default stopped, was bound to 127.0.0.1:8080
+2018-04-12 09:59:35,969 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0007: Undertow HTTPS listener https stopped, was bound to 127.0.0.1:8443
+2018-04-12 09:59:35,974 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0004: Undertow 1.4.0.Final stopping
+2018-04-12 09:59:35,992 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 89) WFLYCLINF0003: Stopped client-mappings cache from ejb container
+2018-04-12 09:59:35,995 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) WFLYSRV0028: Stopped deployment pizza-order.war (runtime-name: pizza-order.war) in 383ms
+2018-04-12 09:59:36,111 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) WFLYSRV0028: Stopped deployment camunda-webapp-jboss-7.9.0-alpha1.war (runtime-name: camunda-webapp-jboss-7.9.0-alpha1.war) in 499ms
+2018-04-12 09:59:36,118 INFO  [org.jboss.as] (MSC service thread 1-6) WFLYSRV0050: WildFly Full 10.1.0.Final (WildFly Core 2.2.0.Final) stopped in 498ms
