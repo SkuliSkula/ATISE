@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class OrderEntity implements Serializable {
@@ -17,12 +18,45 @@ public class OrderEntity implements Serializable {
 
   @Version
   protected long version;
+  
+  // Customer data
+  protected String fullName;
+  protected String phoneNumber;
+  protected String email;
+  protected String shippingAddress;
 
-  protected String customer;
-  protected String address;
-  protected String pizza;
-  protected boolean approved;
+  // Booking data
+  protected Date sessionStart;
+  protected double duration;
+  protected String shootingType;
+  protected String shootingLocation;
+  
+  public String getShootingType() {
+	return shootingType;
+}
 
+public void setShootingType(String shootingType) {
+	this.shootingType = shootingType;
+}
+
+public String getShootingLocation() {
+	return shootingLocation;
+}
+
+public void setShootingLocation(String shootingLocation) {
+	this.shootingLocation = shootingLocation;
+}
+
+public boolean isSpecialEquipmentNeeded() {
+	return isSpecialEquipmentNeeded;
+}
+
+public void setSpecialEquipmentNeeded(boolean isSpecialEquipmentNeeded) {
+	this.isSpecialEquipmentNeeded = isSpecialEquipmentNeeded;
+}
+
+protected boolean isSpecialEquipmentNeeded; // This should be decided by the photographer
+  
   public Long getId() {
     return id;
   }
@@ -39,35 +73,52 @@ public class OrderEntity implements Serializable {
     this.version = version;
   }
 
-  public String getCustomer() {
-    return customer;
-  }
+public String getFullName() {
+	return fullName;
+}
 
-  public void setCustomer(String customer) {
-    this.customer = customer;
-  }
+public void setFullName(String fullName) {
+	this.fullName = fullName;
+}
 
-  public String getAddress() {
-    return address;
-  }
+public String getPhoneNumber() {
+	return phoneNumber;
+}
 
-  public void setAddress(String address) {
-    this.address = address;
-  }
+public void setPhoneNumber(String phoneNumber) {
+	this.phoneNumber = phoneNumber;
+}
 
-  public String getPizza() {
-    return pizza;
-  }
+public String getEmail() {
+	return email;
+}
 
-  public void setPizza(String pizza) {
-    this.pizza = pizza;
-  }
+public void setEmail(String email) {
+	this.email = email;
+}
 
-  public boolean isApproved() {
-    return approved;
-  }
+public String getShippingAddress() {
+	return shippingAddress;
+}
 
-  public void setApproved(boolean approved) {
-    this.approved = approved;
-  }
+public void setShippingAddress(String shippingAddress) {
+	this.shippingAddress = shippingAddress;
+}
+
+public Date getSessionStart() {
+	return sessionStart;
+}
+
+public void setSessionStart(Date sessionStart) {
+	this.sessionStart = sessionStart;
+}
+
+public double getDuration() {
+	return duration;
+}
+
+public void setDuration(double duration) {
+	this.duration = duration;
+}
+
 }

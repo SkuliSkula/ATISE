@@ -33,9 +33,9 @@ public class OrderBusinessLogic {
 		Map<String, Object> variables = delegateExecution.getVariables();
 
 		// Set order attributes
-		orderEntity.setCustomer((String) variables.get("customer"));
-		orderEntity.setAddress((String) variables.get("address"));
-		orderEntity.setPizza((String) variables.get("pizza"));
+		//orderEntity.setCustomer((String) variables.get("customer"));
+		//orderEntity.setAddress((String) variables.get("address"));
+		//orderEntity.setPizza((String) variables.get("pizza"));
 
 		/*
 		 * Persist order instance and flush. After the flush the id of the order
@@ -74,9 +74,9 @@ public class OrderBusinessLogic {
 	}	
 
 	public void rejectOrder(DelegateExecution delegateExecution) {
-		OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
+		/*OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
 		LOGGER.log(Level.INFO, "\n\n\nSending Email:\nDear {0}, your order {1} of a {2} pizza has been rejected.\n\n\n",
-				new String[] { order.getCustomer(), String.valueOf(order.getId()), order.getPizza() });
+				new String[] { order.getCustomer(), String.valueOf(order.getId()), order.getPizza() });*/
 	}
 
 }
