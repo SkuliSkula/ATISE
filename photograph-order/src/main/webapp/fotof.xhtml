@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view>
+	<f:metadata>
+		<!-- Start a new process instance. The Process Definition Key is read internally from
+         request parameters and cached in the CDI conversation scope.
+    -->
+		<f:event type="preRenderView"/>
+	</f:metadata>
+	<h:head>
+		<title>Book a shooting session</title>
+	</h:head>
+	<h:body>
+		<h1>Welcome to Fotof</h1>
+		<h:commandButton id="submit_button" value="Book"
+				action="#{camundaTaskForm.startProcessInstanceByKeyForm()}"/>
+	</h:body>
+</f:view>
+</html>

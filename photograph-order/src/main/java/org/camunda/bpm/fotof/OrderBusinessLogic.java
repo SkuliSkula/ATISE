@@ -32,11 +32,18 @@ public class OrderBusinessLogic {
 		// Get all process variables
 		Map<String, Object> variables = delegateExecution.getVariables();
 
-		// Set order attributes
-		//orderEntity.setCustomer((String) variables.get("customer"));
-		//orderEntity.setAddress((String) variables.get("address"));
-		//orderEntity.setPizza((String) variables.get("pizza"));
-
+		// Set order attributes customer data
+		orderEntity.setFullName((String) variables.get("fullName"));
+		orderEntity.setPhoneNumber((String) variables.get("phoneNumber"));
+		orderEntity.setEmail((String) variables.get("email"));
+		orderEntity.setShippingAddress((String) variables.get("shippingAddress"));
+		
+		// Set order attributes booking data
+		orderEntity.setSessionStart((String) variables.get("sessionaStart"));
+		orderEntity.setTimeOfDay((String) variables.get("timeOfDay"));
+		orderEntity.setShootingType((String) variables.get("shootingType"));
+		orderEntity.setShootingLocation((String) variables.get("shootingLocation"));
+		
 		/*
 		 * Persist order instance and flush. After the flush the id of the order
 		 * instance is set.

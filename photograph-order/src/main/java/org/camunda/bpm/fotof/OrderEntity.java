@@ -10,115 +10,124 @@ import java.util.Date;
 @Entity
 public class OrderEntity implements Serializable {
 
-  private static  final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  @Id
-  @GeneratedValue
-  protected Long id;
+	@Id
+	@GeneratedValue
+	protected Long id;
 
-  @Version
-  protected long version;
-  
-  // Customer data
-  protected String fullName;
-  protected String phoneNumber;
-  protected String email;
-  protected String shippingAddress;
+	@Version
+	protected long version;
 
-  // Booking data
-  protected Date sessionStart;
-  protected double duration;
-  protected String shootingType;
-  protected String shootingLocation;
-  
-  public String getShootingType() {
-	return shootingType;
-}
+	// Customer data
+	protected String fullName;
+	protected String phoneNumber;
+	protected String email;
+	protected String shippingAddress;
 
-public void setShootingType(String shootingType) {
-	this.shootingType = shootingType;
-}
+	// Booking data
+	protected String sessionStart;
+	protected String timeOfDay;
+	protected double duration;
+	protected String shootingType;
+	protected String shootingLocation;
 
-public String getShootingLocation() {
-	return shootingLocation;
-}
+	public String getShootingType() {
+		return shootingType;
+	}
 
-public void setShootingLocation(String shootingLocation) {
-	this.shootingLocation = shootingLocation;
-}
+	public void setShootingType(String shootingType) {
+		this.shootingType = shootingType;
+	}
 
-public boolean isSpecialEquipmentNeeded() {
-	return isSpecialEquipmentNeeded;
-}
+	public String getShootingLocation() {
+		return shootingLocation;
+	}
 
-public void setSpecialEquipmentNeeded(boolean isSpecialEquipmentNeeded) {
-	this.isSpecialEquipmentNeeded = isSpecialEquipmentNeeded;
-}
+	public void setShootingLocation(String shootingLocation) {
+		this.shootingLocation = shootingLocation;
+	}
 
-protected boolean isSpecialEquipmentNeeded; // This should be decided by the photographer
-  
-  public Long getId() {
-    return id;
-  }
+	public boolean isSpecialEquipmentNeeded() {
+		return isSpecialEquipmentNeeded;
+	}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	public void setSpecialEquipmentNeeded(boolean isSpecialEquipmentNeeded) {
+		this.isSpecialEquipmentNeeded = isSpecialEquipmentNeeded;
+	}
 
-  public long getVersion() {
-    return version;
-  }
+	protected boolean isSpecialEquipmentNeeded; // This should be decided by the photographer
 
-  public void setVersion(long version) {
-    this.version = version;
-  }
+	public Long getId() {
+		return id;
+	}
 
-public String getFullName() {
-	return fullName;
-}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-public void setFullName(String fullName) {
-	this.fullName = fullName;
-}
+	public long getVersion() {
+		return version;
+	}
 
-public String getPhoneNumber() {
-	return phoneNumber;
-}
+	public void setVersion(long version) {
+		this.version = version;
+	}
 
-public void setPhoneNumber(String phoneNumber) {
-	this.phoneNumber = phoneNumber;
-}
+	public String getFullName() {
+		return fullName;
+	}
 
-public String getEmail() {
-	return email;
-}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
-public void setEmail(String email) {
-	this.email = email;
-}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-public String getShippingAddress() {
-	return shippingAddress;
-}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
-public void setShippingAddress(String shippingAddress) {
-	this.shippingAddress = shippingAddress;
-}
+	public String getEmail() {
+		return email;
+	}
 
-public Date getSessionStart() {
-	return sessionStart;
-}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-public void setSessionStart(Date sessionStart) {
-	this.sessionStart = sessionStart;
-}
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
 
-public double getDuration() {
-	return duration;
-}
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
 
-public void setDuration(double duration) {
-	this.duration = duration;
-}
+	public String getSessionStart() {
+		return sessionStart;
+	}
+
+	public void setSessionStart(String sessionStart) {
+		this.sessionStart = sessionStart;
+	}
+
+	public double getDuration() {
+		return duration;
+	}
+
+	public void setDuration(double duration) {
+		this.duration = duration;
+	}
+
+	public String getTimeOfDay() {
+		return timeOfDay;
+	}
+
+	public void setTimeOfDay(String timeOfDay) {
+		this.timeOfDay = timeOfDay;
+	}
 
 }

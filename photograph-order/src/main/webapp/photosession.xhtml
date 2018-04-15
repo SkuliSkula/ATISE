@@ -17,11 +17,18 @@
   </h:head>
   <h:body>
     <h1>Order:</h1>
-    <p>Customer: #{approveOrderController.orderEntity.customer}</p>
-    <p>Address: #{approveOrderController.orderEntity.address}</p>
-    <p>Pizza: #{approveOrderController.orderEntity.pizza}</p>
+    <h2>Customer data</h2>
+    <p>Customer: #{approveOrderController.orderEntity.fullName}</p>
+    <p>Phone number: #{approveOrderController.orderEntity.phoneNumber}</p>
+    <p>Email: #{approveOrderController.orderEntity.email}</p>
+    <p>Shipping address: #{approveOrderController.orderEntity.shippingAddress}</p>
+    <h2>Booking data</h2>
+    <p>Date: #{approveOrderController.orderEntity.sessionStart}</p>
+    <p>Time: #{approveOrderController.orderEntity.timeOfDay}</p>
+    <p>Shooting Type: #{approveOrderController.orderEntity.shootingType}</p>
+    <p>Shooting Location: #{approveOrderController.orderEntity.shootingLocation}</p>
     <h:form id="submitForm">
-      <h:outputLabel>Approve Order?</h:outputLabel>
+      <h:outputLabel>Photos uploaded?</h:outputLabel>
       <h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}"/><br/>
       <h:commandButton id="submit_button" value="Approve Order" action="#{approveOrderController.submitForm()}" />
     </h:form>
