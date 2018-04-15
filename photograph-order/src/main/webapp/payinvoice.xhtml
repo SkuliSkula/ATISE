@@ -10,29 +10,35 @@
          request parameters and cached in the CDI conversation scope.
     -->
 		<f:event type="preRenderView"
-			listener="#{camundaTaskForm.startTaskform()}" />
+			listener="#{camundaTaskForm.startTaskForm()}" />
 	</f:metadata>
 	<h:head>
-		<title>Photographer and Technician work</title>
+		<title>Payment</title>
 	</h:head>
 	<h:body>
-		<h2>Customer invoice payment</h2>
+		<h1>Customer invoice payment...</h1>
 		<h:form id="submitForm">
-		
-			<h:panelGrid columns="3">
-				<label for="pay">Pay invoice: </label>
-				<p>Total cost: #{approveOrderController.orderEntity.totalCost}</p>
-				<!-- create process variables using the processVariables map. -->
-				<h:commandButton id="pay_buttom" value="Pay"
+		    <p>Customer: #{approveOrderController.orderEntity.fullName}</p>
+		    <p>Phone number: #{approveOrderController.orderEntity.phoneNumber}</p>
+		    <p>Email: #{approveOrderController.orderEntity.email}</p>
+		    <p>Shipping address: #{approveOrderController.orderEntity.shippingAddress}</p>
+		    <h2>Booking data</h2>
+		    <p>Date: #{approveOrderController.orderEntity.sessionStart}</p>
+		    <p>Time: #{approveOrderController.orderEntity.timeOfDay}</p>
+		    <p>Shooting Type: #{approveOrderController.orderEntity.shootingType}</p>
+		    <p>Shooting Location: #{approveOrderController.orderEntity.shootingLocation}</p>
+		    <h2>Total cost of photography session</h2>
+			<p>Total cost: #{approveOrderController.orderEntity.totalCost}</p>
+			<!-- create process variables using the processVariables map. -->
+			<p></p>
+			<h:commandButton id="pay_buttom" value="Pay"
 				action="#{approveOrderController.submitForm()}" />
-				
-			</h:panelGrid>
-			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
-
+		<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
+		
            NOTE: Syntax is different when working on user task forms, see file "approveLoanRequest.xhtml".
       -->
-		
-		
+
+		</h:form>
 	</h:body>
 </f:view>
 </html>

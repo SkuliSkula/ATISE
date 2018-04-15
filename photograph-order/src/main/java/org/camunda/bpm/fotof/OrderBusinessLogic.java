@@ -104,34 +104,6 @@ public class OrderBusinessLogic {
 
 	public void rejectOrder(DelegateExecution delegateExecution) {
 		//OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
-		//updateOrder(delegateExecution);
-		calculateOrder(delegateExecution);
-	}
-	
-	public void calculateOrder(DelegateExecution delegateExecution) {
-		OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
-		Map<String, Object> variables = delegateExecution.getVariables();
-		double totalCost = 0.0;
-		
-		if(order == null)
-			return;
-		
-		if(order.getShootingLocation().equals("InStudio"))
-			totalCost = 100;
-		else if(order.getShootingLocation().equals("OnLocation"))
-			totalCost = 150;
-		
-		order.setTotalCost(totalCost);
-		entityManager.persist(order);
-		entityManager.flush();
-
-		// Remove no longer needed process variables
-		delegateExecution.removeVariables(variables.keySet());
-
-		// Add newly created order id as process variable
-		delegateExecution.setVariable("orderId", order.getId());
-		
-		mergeOrderAndCompleteTask(order);
 	}
 
 }

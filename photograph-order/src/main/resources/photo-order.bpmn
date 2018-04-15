@@ -47,7 +47,7 @@
     </bpmn:userTask>
     <bpmn:userTask id="Task_1lcll5h" name="Technician finishes his work" camunda:formKey="app:technicianspecialrequest.jsf">
       <bpmn:extensionElements>
-        <camunda:taskListener expression="${orderBusinessLogic.rejectOrder(execution)}" event="complete" />
+        <camunda:taskListener expression="${approveOrderController.calculateOrder(execution)}" event="complete" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0vzafdi</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_000nh2v</bpmn:outgoing>
