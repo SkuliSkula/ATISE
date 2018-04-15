@@ -19,20 +19,17 @@
 		<h2>Browsing the gallery</h2>
 		<h:form id="submitForm">
 		
-			<h:panelGrid columns="4">
+			<h:panelGrid columns="3">
 				<label for="pictureOne">Picture 1:</label>
-				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.aep1}" id="pictureOneBool"/>
+				<label for="ae1">Additional editing?</label>
 				<h:inputText id="pictureOneText" value="#{processVariables['aep1Info']}"/>
 					
 				<label for="pictureTwo">Picture 2:</label>
-				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.aep2}" id="pictureTwoBool"/>
+				<label for="ae2">Additional editing?</label>
 				<h:inputText id="pictureTwoText" value="#{processVariables['aep2Info']}"/>
 
 				<label for="pictureThree">Picture 3:</label>
-				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.aep3}" id="pictureThreeBool"/>
+				<label for="ae3">Additional editing?</label>
 				<h:inputText id="pictureThreeText" value="#{processVariables['aep3Info']}"/>
 			</h:panelGrid>
 			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
