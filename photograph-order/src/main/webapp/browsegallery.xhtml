@@ -1,58 +1,61 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core">
 
 <f:view>
-	<f:metadata>
-		<!-- Start a new process instance. The Process Definition Key is read internally from
+  <f:metadata>
+    <!-- Start a new process instance. The Process Definition Key is read internally from
          request parameters and cached in the CDI conversation scope.
     -->
-		<f:event type="preRenderView"
-			listener="#{camundaTaskForm.startTaskForm()}" />
-	</f:metadata>
-	<h:head>
-		<title>Book a shooting session</title>
-	</h:head>
-	<h:body>
-		<h2>Browsing the gallery</h2>
-		<h:form id="submitForm">
-		
-			<h:panelGrid columns="3">
-				<label for="pictureOne">Picture 1:</label>
-				<label for="ae1">Additional editing?</label>
-				<h:inputText id="pictureOneText" value="#{processVariables['aep1Info']}"/>
-					
-				<label for="pictureTwo">Picture 2:</label>
-				<label for="ae2">Additional editing?</label>
-				<h:inputText id="pictureTwoText" value="#{processVariables['aep2Info']}"/>
+    <f:event type="preRenderView" listener="#{camundaTaskForm.startTaskForm()}" />
+  </f:metadata>
+  <h:head>
+    <title>Browse gallery</title>
+  </h:head>
+  <h:body>
+    <h1>Browse gallery</h1>
+    <h:form id="submitForm">
+      <h:panelGrid columns="3" cellpadding = "10" cellspacing = "1">
 
-				<label for="pictureThree">Picture 3:</label>
-				<label for="ae3">Additional editing?</label>
-				<h:inputText id="pictureThreeText" value="#{processVariables['aep3Info']}"/>
-			</h:panelGrid>
-			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
+		<h:outputLabel value = "Picture 1" />
+		<h:outputLabel value = "Additional editing: " />
+		<h:inputText id="pictureOneText" value="#{processVariables['aep1Info']}"/>
+					
+		<h:outputLabel value = "Picture 2" />
+		<h:outputLabel value = "Additional editing: " />
+		<h:inputText id="pictureTwoText" value="#{processVariables['aep2Info']}"/>
+
+		<h:outputLabel value = "Picture 3" />
+		<h:outputLabel value = "Additional editing: " />
+		<h:inputText id="pictureThreeText" value="#{processVariables['aep3Info']}"/>
+		
+      </h:panelGrid>
+      
+      <h:panelGrid columns="2" cellpadding = "10" cellspacing = "1">
+
+		<label for="pickup">Pickup?</label>
+		<!-- create process variables using the processVariables map. -->
+		<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPickUp}" id="pickupBool" />
+				
+		<label for="printout">Printouts?</label>
+		<!-- create process variables using the processVariables map. -->
+		<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPrintOuts}" id="printoutsBool" />
+		
+      </h:panelGrid>
+
+      <!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
 
            NOTE: Syntax is different when working on user task forms, see file "approveLoanRequest.xhtml".
       -->
-      
-      
-      <h:panelGrid columns="2">
+      <h:commandButton id="submit_button" value="Done" action="#{approveOrderController.submitForm()}" />
 
-				<label for="pickup">Pickup?</label>
-				<!-- create process variables using the processVariables map. -->
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPickUp}" id="pickupBool"/>
-				
-				<label for="printout">Printouts?</label>
-				<!-- create process variables using the processVariables map. -->
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPrintOuts}" id="printoutsBool"/>
-			<h:commandButton id="submit_button" value="Done"
-				action="#{approveOrderController.submitForm()}" />
-			</h:panelGrid>
-      
-
-		</h:form>
-	</h:body>
+      <h:messages style="color:red;margin:8px;" />
+    </h:form>
+  </h:body>
 </f:view>
 </html>
+
+
+

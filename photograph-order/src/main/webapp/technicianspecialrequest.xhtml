@@ -19,37 +19,30 @@
 
 		<h2>Technician work:</h2>
 		<h:form id="submitForm">
-			<h:panelGrid columns="2">
 
-				<label for="pictureOne">Picture 1</label>
-				<p>Specieal request:
+				<p><b> Picture 1 </b>- Special request:
 					#{approveOrderController.orderEntity.aep1Info}</p>
-
-				<label for="pictureTwo">Picture 2</label>
-				<p>Specieal request:
+				<p><b> Picture 2 </b> - Special request:
 					#{approveOrderController.orderEntity.aep2Info}</p>
-
-				<label for="pictureThree">Picture 3</label>
-				<p>Specieal request:
+				<p><b> Picture 3 </b> - Special request:
 					#{approveOrderController.orderEntity.aep3Info}</p>
 
-				<label for="add">Add to dropbox</label>
-				<h:selectBooleanCheckbox
+				<h:panelGrid columns="2" cellpadding = "10" cellspacing = "1">
+
+					<h:outputLabel value = "Add to dropbox" />
+					<h:selectBooleanCheckbox
 					value="#{approveOrderController.orderEntity.uploadToDropbox}" />
-
-			</h:panelGrid>
-
-			<h:panelGrid columns="3">
-
-				<label for="print">Print</label>
-				<p>Print: #{approveOrderController.orderEntity.wantsPrintOuts}</p>
-				<h:selectBooleanCheckbox
+								
+					<h:outputLabel value = "Print: #{approveOrderController.orderEntity.wantsPrintOuts}" />
+					<h:selectBooleanCheckbox
 					value="#{approveOrderController.orderEntity.printPhotos}" />
-
-				<label for="drop">Drop to CSR</label>
-				<h:selectBooleanCheckbox
+			
+					<h:outputLabel value = "Drop to CSR" />
+					<h:selectBooleanCheckbox
 					value="#{approveOrderController.orderEntity.dropPhotosToCSR}" />
-			</h:panelGrid>
+		
+     			 </h:panelGrid>
+				
 			<h:commandButton id="submit_button" value="Done"
 				action="#{approveOrderController.submitForm()}" />
 		</h:form>
