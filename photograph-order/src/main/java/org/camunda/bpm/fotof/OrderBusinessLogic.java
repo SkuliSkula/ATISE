@@ -39,10 +39,32 @@ public class OrderBusinessLogic {
 		orderEntity.setShippingAddress((String) variables.get("shippingAddress"));
 		
 		// Set order attributes booking data
-		orderEntity.setSessionStart((String) variables.get("sessionaStart"));
+		orderEntity.setSessionStart((String) variables.get("sessionStart"));
 		orderEntity.setTimeOfDay((String) variables.get("timeOfDay"));
 		orderEntity.setShootingType((String) variables.get("shootingType"));
 		orderEntity.setShootingLocation((String) variables.get("shootingLocation"));
+		
+		/*
+		 * Persist order instance and flush. After the flush the id of the order
+		 * instance is set.
+		 */
+		entityManager.persist(orderEntity);
+		entityManager.flush();
+
+		// Remove no longer needed process variables
+		delegateExecution.removeVariables(variables.keySet());
+
+		// Add newly created order id as process variable
+		delegateExecution.setVariable("orderId", orderEntity.getId());
+	}
+	
+	public void updateOrder(DelegateExecution delegateExecution) {
+		Map<String, Object> variables = delegateExecution.getVariables();
+		OrderEntity orderEntity = getOrder((Long) delegateExecution.getVariable("orderId"));
+		orderEntity.setAep1Info((String) variables.get("aep1Info"));
+		orderEntity.setAep2Info((String) variables.get("aep2Info"));
+		orderEntity.setAep3Info((String) variables.get("aep3Info"));
+		
 		
 		/*
 		 * Persist order instance and flush. After the flush the id of the order
@@ -81,9 +103,8 @@ public class OrderBusinessLogic {
 	}	
 
 	public void rejectOrder(DelegateExecution delegateExecution) {
-		/*OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
-		LOGGER.log(Level.INFO, "\n\n\nSending Email:\nDear {0}, your order {1} of a {2} pizza has been rejected.\n\n\n",
-				new String[] { order.getCustomer(), String.valueOf(order.getId()), order.getPizza() });*/
+		//OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
+		updateOrder(delegateExecution);
 	}
 
 }

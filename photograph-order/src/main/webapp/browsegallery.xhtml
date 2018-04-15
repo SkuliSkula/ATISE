@@ -10,7 +10,7 @@
          request parameters and cached in the CDI conversation scope.
     -->
 		<f:event type="preRenderView"
-			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+			listener="#{camundaTaskForm.startTaskForm()}" />
 	</f:metadata>
 	<h:head>
 		<title>Book a shooting session</title>
@@ -22,18 +22,18 @@
 			<h:panelGrid columns="4">
 				<label for="pictureOne">Picture 1:</label>
 				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="pictureOne"/>
-				<h:inputText id="pictureOne" value="#{processVariables['pictureOne']}"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.aep1}" id="pictureOneBool"/>
+				<h:inputText id="pictureOneText" value="#{processVariables['aep1Info']}"/>
 					
 				<label for="pictureTwo">Picture 2:</label>
 				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="pictureTwo"/>
-				<h:inputText id="pictureTwo" value="#{processVariables['pictureTwo']}"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.aep2}" id="pictureTwoBool"/>
+				<h:inputText id="pictureTwoText" value="#{processVariables['aep2Info']}"/>
 
 				<label for="pictureThree">Picture 3:</label>
 				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="pictureThree"/>
-				<h:inputText id="pictureThree" value="#{processVariables['pictureThree']}"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.aep3}" id="pictureThreeBool"/>
+				<h:inputText id="pictureThreeText" value="#{processVariables['aep3Info']}"/>
 			</h:panelGrid>
 			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
 
@@ -45,16 +45,16 @@
 
 				<label for="pickup">Pickup?</label>
 				<!-- create process variables using the processVariables map. -->
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="pickup"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPickUp}" id="pickupBool"/>
 				
 				<label for="printout">Printouts?</label>
 				<!-- create process variables using the processVariables map. -->
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="printouts"/>
-
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPrintOuts}" id="printoutsBool"/>
+			<h:commandButton id="submit_button" value="Done"
+				action="#{approveOrderController.submitForm()}" />
 			</h:panelGrid>
       
-			<h:commandButton id="submit_button" value="Done"
-				action="#{approveOrderController.submitForm()} />
+
 		</h:form>
 	</h:body>
 </f:view>

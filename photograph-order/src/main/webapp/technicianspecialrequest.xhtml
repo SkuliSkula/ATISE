@@ -13,48 +13,47 @@
 			listener="#{camundaTaskForm.startTaskForm()}" />
 	</f:metadata>
 	<h:head>
-		<title>Photographer and Technician work</title>
+		<title>Technician work</title>
 	</h:head>
 	<h:body>
-			
-			<h2>Technician work: </h2>
-			<h:panelGrid columns="3">
 
-				
-				<label for="pictureOne">Picture 1</label>
-				<p>specieal request: #{approveOrderController.orderEntity.SPECIALREQUEST}</p>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}"/>
-				
-				<label for="pictureTwo">Picture 2</label>
-				<p>specieal request: #{approveOrderController.orderEntity.SPECIALREQUEST}</p>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}"/>
-				
-				<label for="pictureThree">Picture 3</label>
-				<p>specieal request: #{approveOrderController.orderEntity.SPECIALREQUEST}</p>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}"/>
-				
-				<label for="add">Add to dropbox</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}"/>
-				
-			</h:panelGrid>
-			
-			<h:panelGrid columns="3">
-			
+		<h2>Technician work:</h2>
+		<h:panelGrid columns="2">
+
+			<label for="pictureOne">Picture 1</label>
+			<p>specieal request:
+				#{approveOrderController.orderEntity.aep1Info}</p>
+
+			<label for="pictureTwo">Picture 2</label>
+			<p>specieal request:
+				#{approveOrderController.orderEntity.aep2Info}</p>
+
+			<label for="pictureThree">Picture 3</label>
+			<p>specieal request:
+				#{approveOrderController.orderEntity.aep3Info}</p>
+
+			<label for="add">Add to dropbox</label>
+			<h:selectBooleanCheckbox
+				value="#{approveOrderController.orderEntity.uploadToDropbox}" />
+
+		</h:panelGrid>
+
+		<h:panelGrid columns="3">
+
 			<label for="print">Print</label>
-			<p>Print: #{approveOrderController.orderEntity.PRINT}</p>
-			<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}"/>
-			
+			<p>Print: #{approveOrderController.orderEntity.wantsPrintOuts}</p>
+			<h:selectBooleanCheckbox
+				value="#{approveOrderController.orderEntity.printPhotos}" />
+
 			<label for="drop">Drop to CSR</label>
-			<p>Print: #{approveOrderController.orderEntity.DROP}</p>
-			<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}"/>
-			
-			</h:panelGrid>
-			
-			
-			<h:commandButton id="submit_button" value="Done"
-				action="#{approveOrderController.submitForm()} />
-			
-		
+			<h:selectBooleanCheckbox
+				value="#{approveOrderController.orderEntity.dropPhotosToCSR}" />
+
+		</h:panelGrid>
+
+
+		<h:commandButton id="submit_button" value="Done"
+			action="#{approveOrderController.submitForm()}" />
 	</h:body>
 </f:view>
 </html>
