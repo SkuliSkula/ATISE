@@ -22,17 +22,17 @@
 			<h:panelGrid columns="4">
 				<label for="pictureOne">Picture 1:</label>
 				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="pictureOne"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="pictureOne"/>
 				<h:inputText id="pictureOne" value="#{processVariables['pictureOne']}"/>
 					
 				<label for="pictureTwo">Picture 2:</label>
 				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="pictureTwo"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="pictureTwo"/>
 				<h:inputText id="pictureTwo" value="#{processVariables['pictureTwo']}"/>
 
 				<label for="pictureThree">Picture 3:</label>
 				<label>Additional editing?</label>
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="pictureThree"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="pictureThree"/>
 				<h:inputText id="pictureThree" value="#{processVariables['pictureThree']}"/>
 			</h:panelGrid>
 			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
@@ -45,16 +45,16 @@
 
 				<label for="pickup">Pickup?</label>
 				<!-- create process variables using the processVariables map. -->
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="pickup"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="pickup"/>
 				
 				<label for="printout">Printouts?</label>
 				<!-- create process variables using the processVariables map. -->
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}" id="printouts"/>
+				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.VANTAR}" id="printouts"/>
 
 			</h:panelGrid>
       
 			<h:commandButton id="submit_button" value="Done"
-				action="#{camundaTaskForm.completeProcessInstanceForm()}" />
+				action="#{approveOrderController.submitForm()} />
 		</h:form>
 	</h:body>
 </f:view>
