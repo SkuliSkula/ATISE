@@ -10,7 +10,7 @@
          request parameters and cached in the CDI conversation scope.
     -->
 		<f:event type="preRenderView"
-			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+			listener="#{camundaTaskForm.startTaskform()}" />
 	</f:metadata>
 	<h:head>
 		<title>Photographer and Technician work</title>
@@ -21,7 +21,7 @@
 		
 			<h:panelGrid columns="3">
 				<label for="pay">Pay invoice: </label>
-				<label>150 DKK</label>
+				<p>Total cost: #{approveOrderController.orderEntity.totalCost}</p>
 				<!-- create process variables using the processVariables map. -->
 				<h:commandButton id="pay_buttom" value="Pay"
 				action="#{approveOrderController.submitForm()}" />

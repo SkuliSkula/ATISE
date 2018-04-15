@@ -25,6 +25,7 @@ public class OrderEntity implements Serializable {
 	protected String email;
 	protected String shippingAddress;
 	protected boolean showUp;
+	protected double totalCost;
 
 	// Booking data
 	protected String sessionStart;
@@ -36,8 +37,8 @@ public class OrderEntity implements Serializable {
 	// Technician work
 	protected boolean clean;
 	protected boolean edit;
-	
-	// Customer gallery  aep = additional editing picture
+
+	// Customer gallery aep = additional editing picture
 	protected boolean aep1;
 	protected String aep1Info;
 	protected boolean aep2;
@@ -45,13 +46,21 @@ public class OrderEntity implements Serializable {
 	protected boolean aep3;
 	protected String aep3Info;
 	protected boolean wantsPickUp;
-	protected boolean wantsPrintOuts;	
-	
+	protected boolean wantsPrintOuts;
+
 	// technician work
 	protected boolean uploadToDropbox;
 	protected boolean printPhotos;
 	protected boolean dropPhotosToCSR;
-	
+
+	public double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
 	public boolean isPrintPhotos() {
 		return printPhotos;
 	}
@@ -99,7 +108,7 @@ public class OrderEntity implements Serializable {
 	public void setAep3Info(String aep3Info) {
 		this.aep3Info = aep3Info;
 	}
-	
+
 	public boolean isWantsPickUp() {
 		return wantsPickUp;
 	}
@@ -253,13 +262,13 @@ public class OrderEntity implements Serializable {
 	public void setTimeOfDay(String timeOfDay) {
 		this.timeOfDay = timeOfDay;
 	}
-	
+
 	public void setShowUp(boolean showUp) {
 		this.showUp = showUp;
 	}
-	
+
 	public boolean getShowUp() {
 		return showUp;
 	}
-	
+
 }
