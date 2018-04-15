@@ -19,11 +19,12 @@
 		<h2>Customer invoice payment</h2>
 		<h:form id="submitForm">
 		
-			<h:panelGrid columns="2">
-				<label for="pay">Pay invoice</label>
+			<h:panelGrid columns="3">
+				<label for="pay">Pay invoice: </label>
+				<label>150 DKK</label>
 				<!-- create process variables using the processVariables map. -->
 				<h:commandButton id="pay_buttom" value="Pay"
-				action="#{camundaTaskForm.completeProcessInstanceForm()}" />
+				action="#{approveOrderController.submitForm()}" />
 				
 			</h:panelGrid>
 			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
