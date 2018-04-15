@@ -1,37 +1,27 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core">
 
-<f:view>
-	<f:metadata>
-		<!-- Start a new process instance. The Process Definition Key is read internally from
-         request parameters and cached in the CDI conversation scope.
-    -->
-		<f:event type="preRenderView"
-			listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
-	</f:metadata>
-	<h:head>
-		<title>Book a shooting session</title>
-	</h:head>
-	<h:body>
-		<h2>Users</h2>
-		<h:form id="submitForm">
-		
-			<h:panelGrid columns="2">
-				<label for="userShow">Showing up?</label>
-				<!-- create process variables using the processVariables map. -->
-				<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.approved}"/>
-				
-			</h:panelGrid>
-			<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
-
-           NOTE: Syntax is different when working on user task forms, see file "approveLoanRequest.xhtml".
+  <f:view>
+    <f:metadata>
+      <!-- Start working on a task. Task Id is read internally from
+       request parameters and cached in the CDI conversation scope.
       -->
-			<h:commandButton id="submit_button" value="Done"
-				action="#{camundaTaskForm.completeProcessInstanceForm()}" />
-		</h:form>
-	</h:body>
-</f:view>
+
+    <f:event type="preRenderView" listener="#{camundaTaskForm.startTaskForm()}" />
+  </f:metadata>
+  <h:head>
+    <title>Show up</title>
+  </h:head>
+  <h:body>
+    <h1>Are you going to show up?</h1>
+    <h:form id="submitForm">
+      <h:outputLabel>Show up?</h:outputLabel>
+      <h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.showUp}"/><br/>
+      <h:commandButton id="submit_button" value="Show up" action="#{approveOrderController.submitForm()}" />
+    </h:form>
+  </h:body>
+  </f:view>
 </html>

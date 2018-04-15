@@ -24,6 +24,7 @@ public class OrderEntity implements Serializable {
 	protected String phoneNumber;
 	protected String email;
 	protected String shippingAddress;
+	protected boolean showUp;
 
 	// Booking data
 	protected String sessionStart;
@@ -31,6 +32,26 @@ public class OrderEntity implements Serializable {
 	protected double duration;
 	protected String shootingType;
 	protected String shootingLocation;
+
+	// Technician work
+	protected boolean clean;
+	protected boolean edit;
+	
+	public boolean isClean() {
+		return clean;
+	}
+
+	public void setClean(boolean clean) {
+		this.clean = clean;
+	}
+
+	public boolean isEdit() {
+		return edit;
+	}
+
+	public void setEdit(boolean edit) {
+		this.edit = edit;
+	}
 
 	public String getShootingType() {
 		return shootingType;
@@ -129,5 +150,13 @@ public class OrderEntity implements Serializable {
 	public void setTimeOfDay(String timeOfDay) {
 		this.timeOfDay = timeOfDay;
 	}
-
+	
+	public void setShowUp(boolean showUp) {
+		this.showUp = showUp;
+	}
+	
+	public boolean getShowUp() {
+		return showUp;
+	}
+	
 }
