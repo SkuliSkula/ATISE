@@ -2,8 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <f:view>
 	<f:metadata>
@@ -27,16 +26,6 @@
 					#{approveOrderController.orderEntity.aep2Info}</p>
 				<p><b> Picture 3 </b> - Special request:
 					#{approveOrderController.orderEntity.aep3Info}</p>
-					
-				<c:choose>
-    				<c:when test="#{approveOrderController.orderEntity.wantsPrintOuts}">
-       				 <p>Customer requests to print the photos</p>
-  					</c:when>
-   					 <c:otherwise>
-       					<p>Customer only wants dropbox link</p>
-    				</c:otherwise>
-				</c:choose>
-				
 <h3>Technician work checklist:</h3>
 				<h:panelGrid columns="2" cellpadding = "10" cellspacing = "1">
 
@@ -44,17 +33,9 @@
 					<h:selectBooleanCheckbox
 					value="#{approveOrderController.orderEntity.uploadToDropbox}" />
 								
-					<h:outputLabel value = "Print:" />
-					<c:choose>
-    					<c:when test="#{approveOrderController.orderEntity.wantsPrintOuts}">
-       				 		<h:selectBooleanCheckbox
-								value="#{approveOrderController.orderEntity.printPhotos}" />
-  						</c:when>
-   					 	<c:otherwise>
-       						<h:outputLabel value = "No print" />
-    					</c:otherwise>
-						</c:choose>
-					
+					<h:outputLabel value = "Print: #{approveOrderController.orderEntity.wantsPrintOuts}" />
+					<h:selectBooleanCheckbox
+					value="#{approveOrderController.orderEntity.printPhotos}" />
 			
 					<h:outputLabel value = "Drop to CSR" />
 					<h:selectBooleanCheckbox
