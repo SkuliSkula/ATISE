@@ -11,7 +11,7 @@
       <bpmn:incoming>SequenceFlow_06atmu2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_03anuna</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="UserTask_0b3v36h" name="Show up?" camunda:formKey="app:userShow.jsf" camunda:candidateGroups="Customer">
+    <bpmn:userTask id="UserTask_0b3v36h" name="Show up?" camunda:formKey="app:userShow.jsf" camunda:assignee="Customer">
       <bpmn:incoming>SequenceFlow_03anuna</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_14w7jxd</bpmn:outgoing>
     </bpmn:userTask>
@@ -20,29 +20,29 @@
       <bpmn:outgoing>SequenceFlow_0md4bjf</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_10r7cva</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="UserTask_19diw18" name="Do a photo shoot and upload" camunda:formKey="app:photosession.jsf">
+    <bpmn:userTask id="UserTask_19diw18" name="Do a photo shoot and upload" camunda:formKey="app:photosession.jsf" camunda:candidateGroups="Photographer">
       <bpmn:incoming>SequenceFlow_10r7cva</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1mcsbs4</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_1qecjhg" name="Technician work" camunda:formKey="app:technicianWork.jsf">
+    <bpmn:userTask id="Task_1qecjhg" name="Technician work" camunda:formKey="app:technicianWork.jsf" camunda:candidateGroups="Technician">
       <bpmn:incoming>SequenceFlow_1mcsbs4</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ejwd5i</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_0i179hy" name="Browse gallery and place an order" camunda:formKey="app:browsegallery.jsf">
+    <bpmn:userTask id="Task_0i179hy" name="Browse gallery and place an order" camunda:formKey="app:browsegallery.jsf" camunda:candidateGroups="Customer">
       <bpmn:extensionElements>
         <camunda:taskListener expression="${orderBusinessLogic.updateOrder(execution)}" event="complete" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1ejwd5i</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vzafdi</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_1lcll5h" name="Technician finishes his work" camunda:formKey="app:technicianspecialrequest.jsf">
+    <bpmn:userTask id="Task_1lcll5h" name="Technician finishes his work" camunda:formKey="app:technicianspecialrequest.jsf" camunda:candidateGroups="Technician">
       <bpmn:extensionElements>
         <camunda:taskListener expression="${orderBusinessLogic.calculateOrder(execution)}" event="complete" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0vzafdi</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_000nh2v</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_1uivxe9" name="Customer pays invoice" camunda:formKey="app:payinvoice.jsf">
+    <bpmn:userTask id="Task_1uivxe9" name="Customer pays invoice" camunda:formKey="app:payinvoice.jsf" camunda:candidateGroups="Customer">
       <bpmn:extensionElements>
         <camunda:taskListener expression="${orderBusinessLogic.generateDropboxLink(execution)}" event="complete" />
       </bpmn:extensionElements>
@@ -54,14 +54,14 @@
       <bpmn:outgoing>SequenceFlow_17300fu</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_04km4qv</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_0haw49u" name="Send printed photos" camunda:formKey="app:csr.jsf">
+    <bpmn:userTask id="Task_0haw49u" name="Send printed photos" camunda:formKey="app:csr.jsf" camunda:candidateGroups="CSR">
       <bpmn:incoming>SequenceFlow_17300fu</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1s2sgw9</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:endEvent id="EndEvent_1ccb1zj" name="Photo process done">
       <bpmn:incoming>SequenceFlow_0t4spo4</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_1t5g0e9" name="See dropboxLink" camunda:formKey="app:dropbox.jsf">
+    <bpmn:userTask id="Task_1t5g0e9" name="See dropboxLink" camunda:formKey="app:dropbox.jsf" camunda:candidateGroups="Customer">
       <bpmn:incoming>SequenceFlow_0icfp0f</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0t4spo4</bpmn:outgoing>
     </bpmn:userTask>
@@ -70,7 +70,7 @@
       <bpmn:incoming>SequenceFlow_1s2sgw9</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0icfp0f</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_0tlpf6b" name="Pay minimum fee" camunda:formKey="app:payinvoice.jsf">
+    <bpmn:userTask id="Task_0tlpf6b" name="Pay minimum fee" camunda:formKey="app:payinvoice.jsf" camunda:candidateGroups="Customer">
       <bpmn:extensionElements>
         <camunda:taskListener expression="${orderBusinessLogic.calculateOrder(execution)}" event="create" />
       </bpmn:extensionElements>
