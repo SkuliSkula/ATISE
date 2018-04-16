@@ -4,8 +4,8 @@
     <bpmn:participant id="Participant_1cqjvep" name="Fotof" processRef="orderPhotoShoot" />
   </bpmn:collaboration>
   <bpmn:process id="orderPhotoShoot" name="Order photo shoot" isExecutable="true">
-    <bpmn:sequenceFlow id="SequenceFlow_17300fu" name="Want´s printed photos" sourceRef="ExclusiveGateway_08a897e" targetRef="Task_0haw49u">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderBusinessLogic.getOrder(orderId).wantsPrintOuts}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="SequenceFlow_17300fu" name="Want´s the photos sent" sourceRef="ExclusiveGateway_08a897e" targetRef="Task_0haw49u">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not orderBusinessLogic.getOrder(orderId).wantsPickUp}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0hrg82u" sourceRef="Task_1uivxe9" targetRef="ExclusiveGateway_08a897e" />
     <bpmn:sequenceFlow id="SequenceFlow_000nh2v" sourceRef="Task_1lcll5h" targetRef="Task_1uivxe9" />
@@ -88,8 +88,8 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1s2sgw9" sourceRef="Task_0haw49u" targetRef="ExclusiveGateway_1vezr6p" />
     <bpmn:sequenceFlow id="SequenceFlow_0t4spo4" sourceRef="Task_1t5g0e9" targetRef="EndEvent_1ccb1zj" />
-    <bpmn:sequenceFlow id="SequenceFlow_04km4qv" name="No Print" sourceRef="ExclusiveGateway_08a897e" targetRef="ExclusiveGateway_1vezr6p">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not orderBusinessLogic.getOrder(orderId).wantsPrintOuts}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="SequenceFlow_04km4qv" name="Picks up photos" sourceRef="ExclusiveGateway_08a897e" targetRef="ExclusiveGateway_1vezr6p">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderBusinessLogic.getOrder(orderId).wantsPickUp}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:userTask id="Task_1t5g0e9" name="See dropboxLink" camunda:formKey="app:dropbox.jsf">
       <bpmn:incoming>SequenceFlow_0icfp0f</bpmn:incoming>
@@ -243,7 +243,7 @@
         <di:waypoint xsi:type="dc:Point" x="1420" y="82" />
         <di:waypoint xsi:type="dc:Point" x="1420" y="158" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1420" y="107" width="72" height="24" />
+          <dc:Bounds x="1425" y="102" width="90" height="24" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_0mkcohj_di" bpmnElement="Task_0haw49u">
@@ -268,7 +268,7 @@
         <di:waypoint xsi:type="dc:Point" x="1445" y="57" />
         <di:waypoint xsi:type="dc:Point" x="1545" y="57" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1476.8676470588236" y="36" width="37" height="12" />
+          <dc:Bounds x="1456" y="36" width="78" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_11gh85o_di" bpmnElement="Task_1t5g0e9">
