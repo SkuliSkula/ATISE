@@ -56,7 +56,7 @@
       <bpmn:incoming>SequenceFlow_06atmu2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_03anuna</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="UserTask_0b3v36h" name="Show up?" camunda:formKey="app:userShow.jsf" camunda:assignee="Customer">
+    <bpmn:userTask id="UserTask_0b3v36h" name="Show up?" camunda:formKey="app:userShow.jsf" camunda:candidateGroups="Customer">
       <bpmn:incoming>SequenceFlow_03anuna</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_14w7jxd</bpmn:outgoing>
     </bpmn:userTask>

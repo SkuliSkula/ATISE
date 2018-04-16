@@ -105,10 +105,6 @@ public class OrderBusinessLogic {
 			throw new RuntimeException("Cannot complete task", e);
 		}
 	}	
-
-	public void rejectOrder(DelegateExecution delegateExecution) {
-		//OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
-	}
 	
 	public void calculateOrder(DelegateExecution delegateExecution) throws IOException {
 		OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
@@ -139,7 +135,6 @@ public class OrderBusinessLogic {
 	public void generateDropboxLink(DelegateExecution delegateExecution) {
 		OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
 		Map<String, Object> variables = delegateExecution.getVariables();
-		
 		
 		if (order == null)
 			return;
