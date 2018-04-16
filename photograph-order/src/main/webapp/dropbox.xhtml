@@ -12,17 +12,18 @@
     <f:event type="preRenderView" listener="#{camundaTaskForm.startTaskForm()}" />
   </f:metadata>
   <h:head>
-    <title>Dropbox form</title>
+    <title>Dropbox link</title>
   </h:head>
   <h:body>
-    <h1>See dropbox form</h1>
+    <h1>See Dropbox link</h1>
     <h:form id="submitForm">
       
       <h:panelGrid columns="2" cellpadding = "10" cellspacing = "1">
 
 		<label for="dropbox">Dropbox link: </label>
 		<!-- create process variables using the processVariables map. -->
-		<p>Dropbox link: #{approveOrderController.orderEntity.dropbox}</p>
+		<p>Customer: #{approveOrderController.orderEntity.fullName}</p>
+		<p>Dropbox link: #{approveOrderController.orderEntity.dropboxLink}</p>
 		
       </h:panelGrid>
 
@@ -37,6 +38,3 @@
   </h:body>
 </f:view>
 </html>
-
-
-

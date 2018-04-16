@@ -1,40 +1,34 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:ui="http://java.sun.com/jsf/facelets"
-  xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <f:view>
-  <f:metadata>
-    <!-- Start a new process instance. The Process Definition Key is read internally from
+	<f:metadata>
+		<!-- Start a new process instance. The Process Definition Key is read internally from
          request parameters and cached in the CDI conversation scope.
     -->
-    <f:event type="preRenderView" listener="#{camundaTaskForm.startTaskForm()}" />
-  </f:metadata>
-  <h:head>
-    <title>CSR package sent form</title>
-  </h:head>
-  <h:body>
-    <h1>Browse gallery</h1>
-    <h:form id="submitForm">
-      
-      <h:panelGrid columns="2" cellpadding = "10" cellspacing = "1">
+		<f:event type="preRenderView"
+			listener="#{camundaTaskForm.startTaskForm()}" />
+	</f:metadata>
+	<h:head>
+		<title>CSR package sent form</title>
+	</h:head>
+	<h:body>
+		<h1>Customer service representative pack and sends photos...</h1>
+		<h:form id="submitForm">
 
-		<label for="send">Package sent</label>
-		<!-- create process variables using the processVariables map. -->
-		<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.sendPackage}" id="sendBool" />
-		
-      </h:panelGrid>
-
-      <!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
+			<label for="send">Package sent</label>
+			<h:commandButton id="submit_button" value="Done"
+				action="#{approveOrderController.submitForm()}" />
+		</h:form>
+		<!-- The button starts a new process instance. This ends the conversation and redirects us to the tasklist.
 
            NOTE: Syntax is different when working on user task forms, see file "approveLoanRequest.xhtml".
       -->
-      <h:commandButton id="submit_button" value="Done" action="#{approveOrderController.submitForm()}" />
 
-      <h:messages style="color:red;margin:8px;" />
-    </h:form>
-  </h:body>
+	</h:body>
 </f:view>
 </html>
 

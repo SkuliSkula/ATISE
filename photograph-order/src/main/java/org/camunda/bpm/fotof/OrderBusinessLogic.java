@@ -92,6 +92,10 @@ public class OrderBusinessLogic {
 	 */
 	public void mergeOrderAndCompleteTask(OrderEntity orderEntity) {
 		// Merge detached order entity with current persisted state
+		if(orderEntity == null) {
+			LOGGER.log(Level.INFO, "Orderentity in mergeOrderAndCompleteTask is null");
+			return;
+		}
 		entityManager.merge(orderEntity);
 		try {
 			// Complete user task from
@@ -104,6 +108,53 @@ public class OrderBusinessLogic {
 
 	public void rejectOrder(DelegateExecution delegateExecution) {
 		//OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
+	}
+	
+	public void calculateOrder(DelegateExecution delegateExecution) throws IOException {
+		OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
+		Map<String, Object> variables = delegateExecution.getVariables();
+		double totalCost = 0.0;
+
+		if (order == null)
+			return;
+
+		if (order.getShootingLocation().equals("InStudio"))
+			totalCost = 100;
+		else if (order.getShootingLocation().equals("OnLocation"))
+			totalCost = 150;
+
+		order.setTotalCost(totalCost);
+		
+		entityManager.persist(order);
+		entityManager.flush();
+
+		// Remove no longer needed process variables
+		delegateExecution.removeVariables(variables.keySet());
+
+		// Add newly created order id as process variable
+		delegateExecution.setVariable("orderId", order.getId());
+		
+	}
+	
+	public void generateDropboxLink(DelegateExecution delegateExecution) {
+		OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
+		Map<String, Object> variables = delegateExecution.getVariables();
+		
+		
+		if (order == null)
+			return;
+		
+		String link = Url.generateURL();
+		order.setDropboxLink(link);
+		LOGGER.log(Level.INFO, "generate dropbox link = " + link);
+		entityManager.persist(order);
+		entityManager.flush();
+
+		// Remove no longer needed process variables
+		delegateExecution.removeVariables(variables.keySet());
+
+		// Add newly created order id as process variable
+		delegateExecution.setVariable("orderId", order.getId());
 	}
 
 }

@@ -1,7 +1,6 @@
 package org.camunda.bpm.fotof;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
-import org.camunda.bpm.engine.delegate.DelegateExecution;
 
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -10,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Map;
 
 @Named
 @ConversationScoped
@@ -43,6 +41,9 @@ public class ApproveOrderController implements Serializable {
 
 	public void submitForm() throws IOException {
 		// Persist updated order entity and complete task form
+		if(orderEntity == null)
+			orderEntity = getOrderEntity();
+		
 		orderBusinessLogic.mergeOrderAndCompleteTask(orderEntity);
 	}
 
@@ -51,29 +52,5 @@ public class ApproveOrderController implements Serializable {
 		return entityManager.find(OrderEntity.class, orderId);
 	}
 
-	public void calculateOrder(DelegateExecution delegateExecution) throws IOException {
-		OrderEntity order = getOrder((Long) delegateExecution.getVariable("orderId"));
-		Map<String, Object> variables = delegateExecution.getVariables();
-		double totalCost = 0.0;
 
-		if (order == null)
-			return;
-
-		if (order.getShootingLocation().equals("InStudio"))
-			totalCost = 100;
-		else if (order.getShootingLocation().equals("OnLocation"))
-			totalCost = 150;
-
-		order.setTotalCost(totalCost);
-		
-		entityManager.persist(order);
-		entityManager.flush();
-
-		// Remove no longer needed process variables
-		delegateExecution.removeVariables(variables.keySet());
-
-		// Add newly created order id as process variable
-		delegateExecution.setVariable("orderId", order.getId());
-		
-	}
 }

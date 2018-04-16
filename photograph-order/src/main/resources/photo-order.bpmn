@@ -4,40 +4,47 @@
     <bpmn:participant id="Participant_1cqjvep" name="Fotof" processRef="orderPhotoShoot" />
   </bpmn:collaboration>
   <bpmn:process id="orderPhotoShoot" name="Order photo shoot" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1" name="Order received" camunda:formKey="app:placeorder.jsf">
-      <bpmn:outgoing>SequenceFlow_06atmu2</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:serviceTask id="ServiceTask_0lrmoed" name="Persist Order" camunda:expression="${orderBusinessLogic.persistOrder(execution)}">
-      <bpmn:incoming>SequenceFlow_06atmu2</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_03anuna</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:userTask id="UserTask_0b3v36h" name="Show up?" camunda:formKey="app:userShow.jsf" camunda:candidateGroups="Customer">
-      <bpmn:incoming>SequenceFlow_03anuna</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_14w7jxd</bpmn:outgoing>
+    <bpmn:sequenceFlow id="SequenceFlow_17300fu" name="Want´s printed photos" sourceRef="ExclusiveGateway_08a897e" targetRef="Task_0haw49u">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderBusinessLogic.getOrder(orderId).wantsPrintOuts}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0hrg82u" sourceRef="Task_1uivxe9" targetRef="ExclusiveGateway_08a897e" />
+    <bpmn:sequenceFlow id="SequenceFlow_000nh2v" sourceRef="Task_1lcll5h" targetRef="Task_1uivxe9" />
+    <bpmn:sequenceFlow id="SequenceFlow_0vzafdi" sourceRef="Task_0i179hy" targetRef="Task_1lcll5h" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ejwd5i" sourceRef="Task_1qecjhg" targetRef="Task_0i179hy" />
+    <bpmn:sequenceFlow id="SequenceFlow_0yiiw0c" sourceRef="ServiceTask_1w32ybd" targetRef="EndEvent_064cd62" />
+    <bpmn:sequenceFlow id="SequenceFlow_1mcsbs4" sourceRef="UserTask_19diw18" targetRef="Task_1qecjhg" />
+    <bpmn:sequenceFlow id="SequenceFlow_10r7cva" name="Yes" sourceRef="ExclusiveGateway_07926wc" targetRef="UserTask_19diw18">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderBusinessLogic.getOrder(orderId).showUp}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0md4bjf" name="No" sourceRef="ExclusiveGateway_07926wc" targetRef="ServiceTask_1w32ybd">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not orderBusinessLogic.getOrder(orderId).showUp}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_14w7jxd" sourceRef="UserTask_0b3v36h" targetRef="ExclusiveGateway_07926wc" />
+    <bpmn:sequenceFlow id="SequenceFlow_03anuna" sourceRef="ServiceTask_0lrmoed" targetRef="UserTask_0b3v36h" />
+    <bpmn:sequenceFlow id="SequenceFlow_06atmu2" sourceRef="StartEvent_1" targetRef="ServiceTask_0lrmoed" />
+    <bpmn:userTask id="Task_0haw49u" name="Send printed photos" camunda:formKey="app:csr.jsf">
+      <bpmn:incoming>SequenceFlow_17300fu</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1s2sgw9</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_07926wc" name="Order approved?">
-      <bpmn:incoming>SequenceFlow_14w7jxd</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0md4bjf</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_10r7cva</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:userTask id="UserTask_19diw18" name="Do a photo shoot and upload" camunda:formKey="app:photosession.jsf">
-      <bpmn:incoming>SequenceFlow_10r7cva</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1mcsbs4</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:serviceTask id="ServiceTask_1w32ybd" name="Send Rejection Email" camunda:expression="${orderBusinessLogic.rejectOrder(execution)}">
-      <bpmn:incoming>SequenceFlow_0md4bjf</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0yiiw0c</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:endEvent id="EndEvent_064cd62" name="Order rejected">
-      <bpmn:incoming>SequenceFlow_0yiiw0c</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:userTask id="Task_1qecjhg" name="Technician work" camunda:formKey="app:technicianWork.jsf">
-      <bpmn:incoming>SequenceFlow_1mcsbs4</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1ejwd5i</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:endEvent id="EndEvent_1ccb1zj" name="Photo process done">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_08a897e">
       <bpmn:incoming>SequenceFlow_0hrg82u</bpmn:incoming>
-    </bpmn:endEvent>
+      <bpmn:outgoing>SequenceFlow_17300fu</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_04km4qv</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_1uivxe9" name="Customer pays invoice" camunda:formKey="app:payinvoice.jsf">
+      <bpmn:extensionElements>
+        <camunda:taskListener expression="${orderBusinessLogic.generateDropboxLink(execution)}" event="complete" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_000nh2v</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0hrg82u</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_1lcll5h" name="Technician finishes his work" camunda:formKey="app:technicianspecialrequest.jsf">
+      <bpmn:extensionElements>
+        <camunda:taskListener expression="${orderBusinessLogic.calculateOrder(execution)}" event="complete" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0vzafdi</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_000nh2v</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:userTask id="Task_0i179hy" name="Browse gallery and place an order" camunda:formKey="app:browsegallery.jsf">
       <bpmn:extensionElements>
         <camunda:taskListener expression="${orderBusinessLogic.updateOrder(execution)}" event="complete" />
@@ -45,37 +52,60 @@
       <bpmn:incoming>SequenceFlow_1ejwd5i</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vzafdi</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_1lcll5h" name="Technician finishes his work" camunda:formKey="app:technicianspecialrequest.jsf">
-      <bpmn:extensionElements>
-        <camunda:taskListener expression="${approveOrderController.calculateOrder(execution)}" event="complete" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_0vzafdi</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_000nh2v</bpmn:outgoing>
+    <bpmn:userTask id="Task_1qecjhg" name="Technician work" camunda:formKey="app:technicianWork.jsf">
+      <bpmn:incoming>SequenceFlow_1mcsbs4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ejwd5i</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_06atmu2" sourceRef="StartEvent_1" targetRef="ServiceTask_0lrmoed" />
-    <bpmn:sequenceFlow id="SequenceFlow_03anuna" sourceRef="ServiceTask_0lrmoed" targetRef="UserTask_0b3v36h" />
-    <bpmn:sequenceFlow id="SequenceFlow_14w7jxd" sourceRef="UserTask_0b3v36h" targetRef="ExclusiveGateway_07926wc" />
-    <bpmn:sequenceFlow id="SequenceFlow_0md4bjf" name="No" sourceRef="ExclusiveGateway_07926wc" targetRef="ServiceTask_1w32ybd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not orderBusinessLogic.getOrder(orderId).showUp}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_10r7cva" name="Yes" sourceRef="ExclusiveGateway_07926wc" targetRef="UserTask_19diw18">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderBusinessLogic.getOrder(orderId).showUp}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1mcsbs4" sourceRef="UserTask_19diw18" targetRef="Task_1qecjhg" />
-    <bpmn:sequenceFlow id="SequenceFlow_0yiiw0c" sourceRef="ServiceTask_1w32ybd" targetRef="EndEvent_064cd62" />
-    <bpmn:sequenceFlow id="SequenceFlow_1ejwd5i" sourceRef="Task_1qecjhg" targetRef="Task_0i179hy" />
-    <bpmn:sequenceFlow id="SequenceFlow_0hrg82u" sourceRef="Task_1uivxe9" targetRef="EndEvent_1ccb1zj" />
-    <bpmn:sequenceFlow id="SequenceFlow_0vzafdi" sourceRef="Task_0i179hy" targetRef="Task_1lcll5h" />
-    <bpmn:sequenceFlow id="SequenceFlow_000nh2v" sourceRef="Task_1lcll5h" targetRef="Task_1uivxe9" />
-    <bpmn:userTask id="Task_1uivxe9" name="Customer pays invoice" camunda:formKey="app:payinvoice.jsf">
-      <bpmn:incoming>SequenceFlow_000nh2v</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0hrg82u</bpmn:outgoing>
+    <bpmn:endEvent id="EndEvent_064cd62" name="Order rejected">
+      <bpmn:incoming>SequenceFlow_0yiiw0c</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="ServiceTask_1w32ybd" name="Send Rejection Email" camunda:expression="${orderBusinessLogic.rejectOrder(execution)}">
+      <bpmn:incoming>SequenceFlow_0md4bjf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0yiiw0c</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="UserTask_19diw18" name="Do a photo shoot and upload" camunda:formKey="app:photosession.jsf">
+      <bpmn:incoming>SequenceFlow_10r7cva</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1mcsbs4</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_07926wc" name="Order approved?">
+      <bpmn:incoming>SequenceFlow_14w7jxd</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0md4bjf</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_10r7cva</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="UserTask_0b3v36h" name="Show up?" camunda:formKey="app:userShow.jsf" camunda:candidateGroups="Customer">
+      <bpmn:incoming>SequenceFlow_03anuna</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14w7jxd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="ServiceTask_0lrmoed" name="Persist Order" camunda:expression="${orderBusinessLogic.persistOrder(execution)}">
+      <bpmn:incoming>SequenceFlow_06atmu2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_03anuna</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1" name="Order received" camunda:formKey="app:placeorder.jsf">
+      <bpmn:outgoing>SequenceFlow_06atmu2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_1ccb1zj" name="Photo process done">
+      <bpmn:incoming>SequenceFlow_0t4spo4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1s2sgw9" sourceRef="Task_0haw49u" targetRef="ExclusiveGateway_1vezr6p" />
+    <bpmn:sequenceFlow id="SequenceFlow_0t4spo4" sourceRef="Task_1t5g0e9" targetRef="EndEvent_1ccb1zj" />
+    <bpmn:sequenceFlow id="SequenceFlow_04km4qv" name="No Print" sourceRef="ExclusiveGateway_08a897e" targetRef="ExclusiveGateway_1vezr6p">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not orderBusinessLogic.getOrder(orderId).wantsPrintOuts}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Task_1t5g0e9" name="See dropboxLink" camunda:formKey="app:dropbox.jsf">
+      <bpmn:incoming>SequenceFlow_0icfp0f</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0t4spo4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1vezr6p">
+      <bpmn:incoming>SequenceFlow_04km4qv</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1s2sgw9</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0icfp0f</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0icfp0f" sourceRef="ExclusiveGateway_1vezr6p" targetRef="Task_1t5g0e9" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1jkx0tz">
       <bpmndi:BPMNShape id="Participant_1cqjvep_di" bpmnElement="Participant_1cqjvep">
-        <dc:Bounds x="-132" y="-9" width="1844" height="270" />
+        <dc:Bounds x="-132" y="-9" width="2099" height="270" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="-82" y="39" width="36" height="36" />
@@ -110,9 +140,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_1ccb1zj_di" bpmnElement="EndEvent_1ccb1zj">
-        <dc:Bounds x="1623" y="39" width="36" height="36" />
+        <dc:Bounds x="1869" y="39" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1604" y="75" width="74" height="12" />
+          <dc:Bounds x="1850" y="75" width="74" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_19diw18_di" bpmnElement="UserTask_19diw18">
@@ -195,14 +225,68 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0hrg82u_di" bpmnElement="SequenceFlow_0hrg82u">
         <di:waypoint xsi:type="dc:Point" x="1325" y="57" />
-        <di:waypoint xsi:type="dc:Point" x="1623" y="57" />
+        <di:waypoint xsi:type="dc:Point" x="1395" y="57" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1474" y="36" width="0" height="12" />
+          <dc:Bounds x="1360" y="36" width="0" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_0j70qec_di" bpmnElement="Task_1uivxe9">
         <dc:Bounds x="1225" y="17" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_08a897e_di" bpmnElement="ExclusiveGateway_08a897e" isMarkerVisible="true">
+        <dc:Bounds x="1395.2624854819976" y="32" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1420.2624854819976" y="86" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_17300fu_di" bpmnElement="SequenceFlow_17300fu">
+        <di:waypoint xsi:type="dc:Point" x="1420" y="82" />
+        <di:waypoint xsi:type="dc:Point" x="1420" y="158" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1420" y="107" width="72" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0mkcohj_di" bpmnElement="Task_0haw49u">
+        <dc:Bounds x="1370" y="158" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1s2sgw9_di" bpmnElement="SequenceFlow_1s2sgw9">
+        <di:waypoint xsi:type="dc:Point" x="1470" y="198" />
+        <di:waypoint xsi:type="dc:Point" x="1570" y="198" />
+        <di:waypoint xsi:type="dc:Point" x="1570" y="82" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1520" y="177" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0t4spo4_di" bpmnElement="SequenceFlow_0t4spo4">
+        <di:waypoint xsi:type="dc:Point" x="1784" y="57" />
+        <di:waypoint xsi:type="dc:Point" x="1869" y="57" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1826.5" y="36" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_04km4qv_di" bpmnElement="SequenceFlow_04km4qv">
+        <di:waypoint xsi:type="dc:Point" x="1445" y="57" />
+        <di:waypoint xsi:type="dc:Point" x="1545" y="57" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1476.8676470588236" y="36" width="37" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_11gh85o_di" bpmnElement="Task_1t5g0e9">
+        <dc:Bounds x="1684" y="17" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1vezr6p_di" bpmnElement="ExclusiveGateway_1vezr6p" isMarkerVisible="true">
+        <dc:Bounds x="1545.2624854819976" y="32" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1570.2624854819976" y="86" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0icfp0f_di" bpmnElement="SequenceFlow_0icfp0f">
+        <di:waypoint xsi:type="dc:Point" x="1595" y="57" />
+        <di:waypoint xsi:type="dc:Point" x="1684" y="57" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1639.5" y="36" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

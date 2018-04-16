@@ -26,6 +26,7 @@ public class OrderEntity implements Serializable {
 	protected String shippingAddress;
 	protected boolean showUp;
 	protected double totalCost;
+	protected String dropboxLink;
 
 	// Booking data
 	protected String sessionStart;
@@ -52,6 +53,14 @@ public class OrderEntity implements Serializable {
 	protected boolean uploadToDropbox;
 	protected boolean printPhotos;
 	protected boolean dropPhotosToCSR;
+
+	public String getDropboxLink() {
+		return dropboxLink;
+	}
+
+	public void setDropboxLink(String dropboxLink) {
+		this.dropboxLink = dropboxLink;
+	}
 
 	public double getTotalCost() {
 		return totalCost;
