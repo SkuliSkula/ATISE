@@ -34,14 +34,16 @@
       </h:panelGrid>
       
       <h:panelGrid columns="2" cellpadding = "10" cellspacing = "1">
+      
+      	<label for="printout">Do you want to get your photos printed: </label>
+		<!-- create process variables using the processVariables map. -->
+		<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPrintOuts}" id="printoutsBool" />
 
-		<label for="pickup">Pickup?</label>
+		<label for="pickup">If you chose print, do you want to pick up your photos: </label>
 		<!-- create process variables using the processVariables map. -->
 		<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPickUp}" id="pickupBool" />
 				
-		<label for="printout">Printouts?</label>
-		<!-- create process variables using the processVariables map. -->
-		<h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.wantsPrintOuts}" id="printoutsBool" />
+		
 		
       </h:panelGrid>
 

@@ -16,11 +16,14 @@
     <title>Show up</title>
   </h:head>
   <h:body>
-    <h1>Are you going to show up?</h1>
+    <h1>Customer show up</h1>
     <h:form id="submitForm">
-      <h:outputLabel>Show up?</h:outputLabel>
-      <h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.showUp}"/><br/>
-      <h:commandButton id="submit_button" value="Show up" action="#{approveOrderController.submitForm()}" />
+    <h:panelGrid columns="2" cellpadding = "10" cellspacing = "1">
+      <h:outputLabel value="Are you going to show up for photo session:"> value= "Show up?"</h:outputLabel>
+      <h:selectBooleanCheckbox value="#{approveOrderController.orderEntity.showUp}"/>
+      </h:panelGrid>
+    
+      <h:commandButton id="submit_button" value="Done" action="#{approveOrderController.submitForm()}" />
     </h:form>
   </h:body>
   </f:view>
