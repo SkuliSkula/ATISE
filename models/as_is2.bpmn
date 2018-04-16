@@ -403,11 +403,11 @@
       <bpmn:incoming>SequenceFlow_1cs9u7o</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_07kait4</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:task id="Task_0sm4477" name="Work on special request">
+    <bpmn:sequenceFlow id="SequenceFlow_0mvfcye" sourceRef="Task_0sm4477" targetRef="ExclusiveGateway_0xc7okl" />
+    <bpmn:userTask id="Task_0sm4477" name="Work on special request">
       <bpmn:incoming>SequenceFlow_0xo0tba</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0mvfcye</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="SequenceFlow_0mvfcye" sourceRef="Task_0sm4477" targetRef="ExclusiveGateway_0xc7okl" />
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0v9sefc">
@@ -776,7 +776,7 @@
         <di:waypoint xsi:type="dc:Point" x="723" y="302" />
         <di:waypoint xsi:type="dc:Point" x="723" y="429" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="731" y="334.8" width="65" height="36" />
+          <dc:Bounds x="732" y="334.8" width="65" height="36" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0kkmdk3_di" bpmnElement="SequenceFlow_0kkmdk3">
@@ -1254,9 +1254,6 @@
       <bpmndi:BPMNShape id="UserTask_1fh5rk1_di" bpmnElement="Task_1g79cnv">
         <dc:Bounds x="1406" y="-471" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_0sm4477_di" bpmnElement="Task_0sm4477">
-        <dc:Bounds x="488" y="342" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0mvfcye_di" bpmnElement="SequenceFlow_0mvfcye">
         <di:waypoint xsi:type="dc:Point" x="588" y="382" />
         <di:waypoint xsi:type="dc:Point" x="632" y="382" />
@@ -1265,6 +1262,9 @@
           <dc:Bounds x="610" y="360.5" width="0" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1wass41_di" bpmnElement="Task_0sm4477">
+        <dc:Bounds x="488" y="342" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
